@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>vehicle_insurance_system</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/Contact-FormModal-Contact-Form-with-Google-Map.css">
+    <link rel="stylesheet" href="/assets/css/Navbar-Right-Links-Dark.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark shadow-lg py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" th:href="@{/home}"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-car">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="7" cy="17" r="2"></circle>
+                        <circle cx="17" cy="17" r="2"></circle>
+                        <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path>
+                    </svg></span><span>Seguros Pepin</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-5">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"></li>
+<!--                    <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact Us</a></li>-->
+                    <li class="nav-item"></li>
+                </ul><a class="btn btn-primary ms-md-2" role="button" th:href="@{/account}">Your Account</a>
+            </div>
+        </div>
+    </nav>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container">
+            <form id="contactForm-2" action="javascript:void();" th:action="@{register_policy}" th:object="${policy_details}" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="successfail"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" id="message">
+                        <fieldset>
+                            <legend><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-fill">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                </svg>Apply for an insurance policy</legend>
+                        </fieldset>
+                        <div class ="errorMessage"><b><p th:text="${logger.errorMessage}" /></b></div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="from_name">Vehicle Number</label><input class="form-control" type="text" id="from_name" tabindex="-1" name="from_name" required="" th:field="*{vehicleNumber}" placeholder="Vehicle Number"></div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="from_name">Where is the vehicle parked at night?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1" value="Locked enclosure" th:field="*{parkingLocation}" required=""><label class="form-check-label" for="formCheck-1">Locked enclosure</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" value="Not in locked enclosure but within the boundary wall" th:field="*{parkingLocation}" required=""><label class="form-check-label" for="formCheck-2">Not in locked enclosure but within the boundary wall</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-3" value="Outside the boundary wall" th:field="*{parkingLocation}" required=""><label class="form-check-label" for="formCheck-3">Outside the boundary wall</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="from_vmodel">Choose the type of policy:</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-4" value="Liability Policy" th:field="*{insurancePolicy}" required=""><label class="form-check-label" for="formCheck-4">Liability Policy</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-5" value="Full OD + TP" th:field="*{insurancePolicy}" required=""><label class="form-check-label" for="formCheck-5">Full OD + TP</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-6" value="Theft + TP" th:field="*{insurancePolicy}"><label class="form-check-label" for="formCheck-6">Theft + TP</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-7" value="Fire + TP" th:field="*{insurancePolicy}"><label class="form-check-label" for="formCheck-7">Fire + TP</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-8" value="Fire + Theft + TP" th:field="*{insurancePolicy}"><label class="form-check-label" for="formCheck-8">Fire + Theft + TP</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Are you entitled to No Claim Bonus?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-9" value="Yes" th:field="*{noClaimBonus}" required=""><label class="form-check-label" for="formCheck-9">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-10" value="No" th:field="*{noClaimBonus}" required=""><label class="form-check-label" for="formCheck-10">No</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Is the vehicle fitted with an Anti-Theft Device?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-11" value="Yes" th:field="*{antiTheftDevice}" required=""><label class="form-check-label" for="formCheck-11">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-12" value="No" th:field="*{antiTheftDevice}" required=""><label class="form-check-label" for="formCheck-12">No</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Do you wish to include Personal Accident (PA) cover for Named Person?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-13" value="Yes" th:field="*{paCoverNamedPerson}" required=""><label class="form-check-label" for="formCheck-13">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-14" value="No" th:field="*{paCoverNamedPerson}" required=""><label class="form-check-label" for="formCheck-14">No</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Do you wish to include Personal Accident (PA) cover for unnamed persons/hirer/pillion passengers?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-15" value="Yes" th:field="*{paCoverPassengers}" required=""><label class="form-check-label" for="formCheck-15">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-16" value="No" th:field="*{paCoverPassengers}" required=""><label class="form-check-label" for="formCheck-16">No</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Do you wish to give Legal Liability to:</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-17" value="Driver" th:field="*{legalLiability}" required=""><label class="form-check-label" for="formCheck-17">Driver</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-18" value="Employees" th:field="*{legalLiability}" required=""><label class="form-check-label" for="formCheck-18">Employees</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-19" value="Both" th:field="*{legalLiability}" required=""><label class="form-check-label" for="formCheck-19">Both</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Do you wish to opt for higher deductible over and above the compulsory deductible?</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-20" value="Yes" th:field="*{higherDeductible}" required=""><label class="form-check-label" for="formCheck-20">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-21" value="No" th:field="*{higherDeductible}" required=""><label class="form-check-label" for="formCheck-21">No</label></div>
+                        </div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">If Yes, please specify the amount</label><input class="form-control" type="number" name="deductible_value" placeholder="0.0" th:field="*{higherDeductibleValue}" th:value="*{higherDeductibleValue}"></div>
+                        <div class="has-feedback form-group mb-3"><label class="form-label" for="reg_city">Are you a member of the Automobile Association</label>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-22" value="Yes" th:field="*{automobileAssociationMember}" required=""><label class="form-check-label" for="formCheck-22">Yes</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-23" value="No" th:field="*{automobileAssociationMember}" required=""><label class="form-check-label" for="formCheck-23">No</label></div>
+                        </div>
+                        <div class="form-group mb-3"><button class="btn btn-primary d-block w-100" type="submit">Apply for insurance&nbsp;<i class="fa fa-chevron-circle-right"></i></button></div>
+                        <hr>
+                    </div>
+                    <div class="col">
+                        <section class="py-4 py-xl-5">
+                            <div class="container">
+                                <div class="text-white bg-dark border rounded border-0 p-4 p-md-5">
+                                    <h2 class="fw-bold text-white mb-3">El proceso estándar, simplificado.</h2>
+                                    <p class="mb-4">&nbsp;</p>
+                                    <div class="my-3"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <ul class="list-inline">
+                <li class="list-inline-item me-4"><a class="link-light" th:href="@{/account}">Your Account</a></li>
+                <li class="list-inline-item me-4"></li>
+<!--                <li class="list-inline-item"><a class="link-light" th:href="@{/contact}">Contact Us</a></li>-->
+            </ul>
+            <p class="text-muted mb-0">Copyright © 2023 Smaylin Robles</p>
+        </div>
+    </footer>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/Contact-FormModal-Contact-Form-with-Google-Map.js"></script>
+    <script src="https://geodata.solutions/includes/countrystate.js"></script>
+</body>
+
+</html>
